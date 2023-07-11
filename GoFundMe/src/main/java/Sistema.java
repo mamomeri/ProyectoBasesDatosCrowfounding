@@ -1,15 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-/**
- *
- * @author DELL
- */
+import InterfazTextual.InterfazUsuario;
 public class Sistema {
+    
+    private InterfazUsuario intefazUserOBJ;
+  
+    public Sistema() {
+        
+    }
+    
+    
     public static void main(String[] args){
         
-        
+        System.out.println("Hola");
+        InterfazUsuario intefazUserOBJ = new InterfazUsuario();
+        intefazUserOBJ.MostrarInterfaz();
+    
     }
 }
