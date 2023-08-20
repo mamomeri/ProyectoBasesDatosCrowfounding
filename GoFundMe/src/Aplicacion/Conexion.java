@@ -1,3 +1,5 @@
+package Aplicacion;
+
 
 
 import java.sql.*;
@@ -33,12 +35,20 @@ public class Conexion {
 		}
 	}
 	
-	public void ejecutarConsulta(String consultaSQL) {
+	public void ejecutarConsulta(String consultaSQL, Boolean update) {
 		Statement statement = null;
 		try {
 			statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery(consultaSQL);
-			procesarResultados(resultSet);
+                        
+                        if (update){
+                            int filasAfectadas = statement.executeUpdate(consultaSQL);
+                             System.out.println("Filas afectadas: " + filasAfectadas);
+                        } else {
+                            ResultSet resultSet;
+                            resultSet = statement.executeQuery(consultaSQL);
+                            
+                        
+                        procesarResultados(resultSet);}
 		} catch (SQLException e) {
 			System.out.println("Error al ejecutar la consulta.");
 			e.printStackTrace();
@@ -48,9 +58,13 @@ public class Conexion {
 	public void procesarResultados(ResultSet resultSet) {
 		try {
 			while (resultSet.next()) {
-				int id = resultSet.getInt("id_player");
-				String nombre = resultSet.getString("first_name");
-				System.out.println("ID: " + id + ", Nombre: " + nombre);
+                            int columnCount = resultSet.getMetaData().getColumnCount();
+
+                for (int i = 1; i <= columnCount; i++) {
+                    String columnName = resultSet.getMetaData().getColumnName(i);
+                    Object value = resultSet.getObject(i);
+                    System.out.println(columnName +": "+ value);
+                }
 			}
 		} catch (SQLException e) {
 			System.out.println("Error al procesar los resultados.");

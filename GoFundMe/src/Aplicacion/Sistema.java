@@ -1,4 +1,6 @@
-import InterfazUsuario;
+package Aplicacion;
+
+import Aplicacion.InterfazUsuario;
 
 public class Sistema {
     
@@ -11,7 +13,7 @@ public class Sistema {
     
     public static void main(String[] args){
         
-		Conexion miConexion = new Conexion("jdbc:mysql://localhost:3306/MiProyectoDB","root","Magnolia182*");
+		Conexion miConexion = new Conexion("jdbc:mysql://localhost:3306/Crowfounding","root","Magnolia182*");
 		InterfazUsuario intefazUserOBJ = new InterfazUsuario(miConexion);
         intefazUserOBJ.MostrarInterfaz();
 		
