@@ -83,3 +83,36 @@ public class Conexion {
 		}
 	}
 }
+
+
+
+public void insertarUsuarioSP(String nombre, String email, String contraseña) throws SQLException {
+    String spCall = "{CALL InsertUsuario(?, ?, ?)}";
+    try (CallableStatement cs = this.conexion.prepareCall(spCall)) {
+        cs.setString(1, nombre);
+        cs.setString(2, email);
+        cs.setString(3, contraseña);
+        cs.execute();
+    }
+}
+
+
+public void actualizarUsuarioSP(int id, String nombre, String email, String contraseña) throws SQLException {
+    String spCall = "{CALL UpdateUsuario(?, ?, ?, ?)}";
+    try (CallableStatement cs = this.conexion.prepareCall(spCall)) {
+        cs.setInt(1, id);
+        cs.setString(2, nombre);
+        cs.setString(3, email);
+        cs.setString(4, contraseña);
+        cs.execute();
+    }
+}
+
+
+public void eliminarUsuarioSP(int id) throws SQLException {
+    String spCall = "{CALL DeleteUsuario(?)}";
+    try (CallableStatement cs = this.conexion.prepareCall(spCall)) {
+        cs.setInt(1, id);
+        cs.execute();
+    }
+}
