@@ -17,6 +17,8 @@ LEFT JOIN
 GROUP BY
     C.ID;
     
+SELECT * from Vista_CampañaComentarios;
+    
 -- Vista 2: Información de Donaciones por Usuario
 CREATE VIEW Vista_DonacionesUsuario AS
 SELECT

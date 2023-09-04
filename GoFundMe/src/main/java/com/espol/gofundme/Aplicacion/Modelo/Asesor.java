@@ -1,38 +1,31 @@
-package Aplicacion.Modelo;
+package com.espol.gofundme.Aplicacion.Modelo;
 
-import Aplicacion.Modelo.IConsultable;
-import Aplicacion.InterfazUsuario;
+import com.espol.gofundme.Aplicacion.Modelo.IConsultable;
+import com.espol.gofundme.Aplicacion.InterfazUsuario;
 import java.util.List;
 import java.util.Scanner;
-
-public class Usuario implements IConsultable {
+public class Asesor implements IConsultable {
     private Integer ID;
     private String nombre;
     private String email;
     private String contraseña;
-    private String tarjetaDebito;
-    private Integer ID_tipo_usuario;
-    private Integer ID_campaña;  
+    private String teléfono;
     private InterfazUsuario manejadorConsola;
     private Scanner scanner;
 
-    public Usuario() {
+    public Asesor() {
         manejadorConsola = new InterfazUsuario();
         scanner = new Scanner(System.in);
     }
     
-    public Usuario(Integer ID, String nombre, String email, String contraseña, String tarjetaDebito, Integer ID_tipo_usuario, Integer ID_campaña) {
+    public Asesor(int ID, String nombre, String email, String contraseña, String teléfono) {
         this.ID = ID;
         this.nombre = nombre;
         this.email = email;
         this.contraseña = contraseña;
-        this.tarjetaDebito = tarjetaDebito;
-        this.ID_tipo_usuario = ID_tipo_usuario;
-        this.ID_campaña = ID_campaña;
+        this.teléfono = teléfono;
         manejadorConsola = new InterfazUsuario();
-        scanner = new Scanner(System.in);
     }
-
     
 
     // Getters and setters
@@ -40,55 +33,51 @@ public class Usuario implements IConsultable {
 
     @Override
     public String añadir() {
-        System.out.println("Añadir Usuario: ");
+        // Logic to add a new Asesor record
+        
+        System.out.println("Añadir Asesor: ");
         manejadorConsola.pedirParametro(Integer.class, "ID");
         manejadorConsola.pedirParametro(String.class, "nombre");
         manejadorConsola.pedirParametro(String.class, "email");
         manejadorConsola.pedirParametro(String.class, "contraseña");
-        manejadorConsola.pedirParametro(String.class, "tarjetaDebito");
-        manejadorConsola.pedirParametro(Integer.class, "ID_tipo_usuario");
-        manejadorConsola.pedirParametro(Integer.class, "ID_campaña");
+        manejadorConsola.pedirParametro(String.class, "teléfono");
         List<Object> resultados = manejadorConsola.pedirParametrosConsola();
-        this.ID = (Integer)resultados.get(0);
+        this.ID = (int)resultados.get(0);
         this.nombre = (String)resultados.get(1);
         this.email = (String)resultados.get(2);
         this.contraseña = (String)resultados.get(3);
-        this.tarjetaDebito = (String)resultados.get(4);
-        this.ID_tipo_usuario = (Integer)resultados.get(5);
-        this.ID_campaña = (Integer)resultados.get(6);
+        this.teléfono = (String)resultados.get(4);
         resultados = null;
-        String sql = "INSERT INTO Usuario (ID, nombre, email, contraseña, tarjetaDebito, ID_tipo_usuario, ID_campaña) VALUES (" +
+        String sql = "INSERT INTO Asesor (ID, nombre, email, contraseña, teléfono) VALUES (" +
              this.ID + ", " +
              "'" + this.nombre + "', " +
              "'" + this.email + "', " +
              "'" + this.contraseña + "', " +
-             "'" + this.tarjetaDebito + "', " +
-             (this.ID_tipo_usuario != null ? this.ID_tipo_usuario : "NULL") + ", " +
-             (this.ID_campaña != null ? this.ID_campaña : "NULL") + 
+             "'" + this.teléfono + "'" +
              ");";
         return sql;
-    }
 
+    }
+    
     @Override
     public String consultar() {
-        System.out.println("Consultar Usuario por ID: ");
+        System.out.println("Consultar Asesor por ID: ");
         manejadorConsola.pedirParametro(Integer.class, "ID");
         List<Object> resultados = manejadorConsola.pedirParametrosConsola();
         this.ID = (Integer)resultados.get(0);
         resultados = null;
-        String sql = "SELECT * FROM Usuario WHERE ID = " + this.ID.toString() + ";";
+        String sql = "SELECT * FROM Asesor WHERE ID = " + this.ID.toString()+");";
         return sql;
     }
 
     @Override
     public String editar() {
-        System.out.println("Editar Usuario:");
+        // Mostrar opciones de atributos que el usuario puede editar
+        System.out.println("Editar Asesor:");
         System.out.println("1. Nombre");
         System.out.println("2. Email");
         System.out.println("3. Contraseña");
-        System.out.println("4. Tarjeta Debito");
-        System.out.println("5. Tipo de Usuario (ID)");
-        System.out.println("6. Campaña (ID)");
+        System.out.println("4. Teléfono");
         System.out.print("Seleccione el número del atributo que desea editar: ");
 
         int opcion = scanner.nextInt();
@@ -110,35 +99,29 @@ public class Usuario implements IConsultable {
                 tipoDato = String.class;
                 break;
             case 4:
-                campoAEditar = "tarjetaDebito";
+                campoAEditar = "teléfono";
                 tipoDato = String.class;
                 break;
-            case 5:
-                campoAEditar = "ID_tipo_usuario";
-                tipoDato = Integer.class;
-                break;
-            case 6:
-                campoAEditar = "ID_campaña";
-                tipoDato = Integer.class;
-                break;
+            // Puedes agregar más casos si tienes atributos con tipos de datos Integer o Double
             default:
                 System.out.println("Opción no válida.");
                 return "";
         }
 
         // Pedir al usuario el nuevo valor para el atributo seleccionado
-        manejadorConsola.pedirParametro(tipoDato, "Nuevo valor para " + campoAEditar);
+        manejadorConsola.pedirParametro(tipoDato, campoAEditar);
         List<Object> resultados = manejadorConsola.pedirParametrosConsola();
         nuevoValor = resultados.get(0);
 
-        // Pedir al usuario el ID del usuario a editar
-        manejadorConsola.pedirParametro(Integer.class, "ID del Usuario a editar");
+        // Pedir al usuario el ID del asesor a editar
+        manejadorConsola.pedirParametro(Integer.class, "ID del Asesor a editar");
         resultados = manejadorConsola.pedirParametrosConsola();
         Integer ID = (Integer)resultados.get(0);
 
         // Generar el query SQL
-        String sql = "UPDATE Usuario SET " + campoAEditar + " = ";
+        String sql = "UPDATE Asesor SET " + campoAEditar + " = ";
 
+        // Dependiendo del tipo de dato, formatear el valor correctamente para el SQL
         if (tipoDato == String.class) {
             sql += "'" + nuevoValor.toString() + "'";
         } else {
@@ -153,12 +136,12 @@ public class Usuario implements IConsultable {
 
     @Override
     public String eliminar() {
-        System.out.println("Eliminar Usuario por ID: ");
+        System.out.println("Eliminar Asesor por ID: ");
         manejadorConsola.pedirParametro(Integer.class, "ID");
         List<Object> resultados = manejadorConsola.pedirParametrosConsola();
         this.ID = (Integer)resultados.get(0);
         resultados = null;
-        String sql = "DELETE FROM Usuario WHERE ID = " + this.ID.toString() + ";";
+        String sql = "DELETE FROM Asesor WHERE ID =" +this.ID.toString()+");";
         return sql;
     }
 }

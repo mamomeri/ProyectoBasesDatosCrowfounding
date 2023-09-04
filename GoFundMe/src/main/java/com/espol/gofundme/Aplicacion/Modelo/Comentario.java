@@ -1,7 +1,7 @@
-package Aplicacion.Modelo;
+package com.espol.gofundme.Aplicacion.Modelo;
 
-import Aplicacion.Modelo.IConsultable;
-import Aplicacion.InterfazUsuario;
+import com.espol.gofundme.Aplicacion.Modelo.IConsultable;
+import com.espol.gofundme.Aplicacion.InterfazUsuario;
 import java.util.List;
 import java.util.Scanner;
 

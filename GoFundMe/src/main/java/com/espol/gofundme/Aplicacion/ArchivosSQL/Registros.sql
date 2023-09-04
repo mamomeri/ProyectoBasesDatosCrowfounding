@@ -15,10 +15,10 @@ use crowfounding;
 -- Ubicación_Campaña (ID, País, Ciudad)
 -- (1, 'Italia', 'Milan'),
 
---Asesor (ID, nombre, email, contraseña, teléfono)
+-- Asesor (ID, nombre, email, contraseña, teléfono)
 -- (1, 'Allan', 'Allan@founding.com', 'asesor1pass', '123-456-7890'),
 
---Asesor_Campaña (ID, ID_Estado_legal, ID_asesor, ID_campaña)
+-- Asesor_Campaña (ID, ID_Estado_legal, ID_asesor, ID_campaña)
 -- (1, 1, 1, 101),
 
 

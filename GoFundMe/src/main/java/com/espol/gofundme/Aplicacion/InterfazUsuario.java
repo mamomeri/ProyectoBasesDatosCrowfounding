@@ -1,13 +1,11 @@
-package Aplicacion;
+package com.espol.gofundme.Aplicacion;
 
-import Aplicacion.Conexion;
-import Aplicacion.InputRequest;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import Aplicacion.Modelo.*;
+import com.espol.gofundme.Aplicacion.Modelo.*;
 public class InterfazUsuario {
 	private Conexion conectorInterfaz;
         

@@ -1,4 +1,4 @@
-package Aplicacion;
+package com.espol.gofundme.Aplicacion;
 
 
 import java.util.Scanner;

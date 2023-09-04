@@ -1,5 +1,5 @@
 
-package Aplicacion.Modelo;
+package com.espol.gofundme.Aplicacion.Modelo;
 
 public interface IConsultable {
     
